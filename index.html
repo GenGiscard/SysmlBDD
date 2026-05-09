@@ -71,15 +71,13 @@ body {
 }
 
 .brand-mono {
-  width: 34px; height: 34px;
-  background: var(--ink);
-  color: var(--paper-soft);
-  display: grid; place-items: center;
-  font-family: 'Fraunces', serif;
-  font-weight: 700;
-  font-size: 17px;
-  border-radius: 4px;
-  letter-spacing: -0.04em;
+  width: auto;
+  height: 38px;
+  display: block;
+  object-fit: contain;
+  border-radius: 3px;
+  background: transparent;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
 }
 
 .brand-text { font-size: 15px; }
@@ -1526,6 +1524,215 @@ h3 {
   margin-right: 8px;
 }
 
+.exam-special-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: var(--accent);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* ====== CHOIX EN MODE EXAM (pas de feedback visuel correct/incorrect) ====== */
+.choice.selected-exam {
+  background: var(--paper);
+  border-color: var(--ink);
+  color: var(--ink);
+  cursor: default;
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.choice.selected-exam::after {
+  content: " \2713";
+  font-weight: 700;
+  margin-left: 6px;
+  color: var(--ink);
+}
+
+/* ====== STATUS DE SOUMISSION DES R\u00c9SULTATS ====== */
+.submit-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 100px;
+  margin-top: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+.submit-status.ok    { border-color: var(--success); color: var(--success); background: #f0f7ee; }
+.submit-status.local { border-color: var(--muted); color: var(--ink-soft); }
+.submit-status.warn  { border-color: var(--accent); color: var(--accent); background: #fdf3df; }
+
+/* ====== TABLEAU DE BORD ENSEIGNANT ====== */
+.dash-link {
+  font-size: 11px !important;
+  color: var(--accent) !important;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent);
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: inherit;
+  padding: 0;
+  font-weight: 600;
+}
+.dash-link:hover {
+  color: #a7421e !important;
+  border-bottom-color: #a7421e;
+}
+.dash-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 34, 54, 0.84);
+  display: none;
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+.dash-modal.show { display: flex; }
+.dash-card {
+  background: var(--surface);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 880px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5);
+}
+.dash-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface) 100%);
+}
+.dash-head h3 {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+.dash-close {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.dash-close:hover { background: var(--paper); color: var(--ink); }
+.dash-body { padding: 22px 24px; overflow-y: auto; flex: 1; }
+.dash-pwd-step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+  margin: 24px auto;
+}
+.dash-pwd-step input {
+  padding: 11px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--ink);
+}
+.dash-pwd-step input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(197, 85, 45, 0.15);
+}
+.dash-pwd-msg {
+  font-size: 13px;
+  color: var(--accent);
+  text-align: center;
+  min-height: 18px;
+}
+.dash-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 0 14px;
+  flex-wrap: wrap;
+}
+.dash-count {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+.dash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dash-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.4fr 1.6fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  font-size: 13.5px;
+}
+.dash-row.dash-head-row {
+  background: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.dash-name { font-weight: 600; color: var(--ink); }
+.dash-classe {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--paper);
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+.dash-note {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+}
+.dash-mention { font-size: 12.5px; font-style: italic; color: var(--accent); }
+.dash-time { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+.dash-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-style: italic;
+}
+.dash-loading { text-align: center; padding: 40px; color: var(--muted); }
+
+@media (max-width: 700px) {
+  .dash-row { grid-template-columns: 1fr 1fr; row-gap: 4px; }
+  .dash-row.dash-head-row { display: none; }
+}
+
 /* ====== PASS THRESHOLD HINT ====== */
 .pass-hint {
   display: inline-block;
@@ -1668,16 +1875,10 @@ h3 {
     </svg>
   </button>
   <div class="brand">
-    <!-- Logo ESTIC : remplace ce SVG par ton logo base64 si besoin -->
-    <svg class="brand-mono" viewBox="0 0 40 40" width="36" height="36" style="background:transparent; border-radius:6px; padding:0">
-      <rect x="0" y="0" width="40" height="40" rx="6" fill="#1a2236"/>
-      <path d="M 8 11 L 22 11 M 8 20 L 19 20 M 8 29 L 22 29" stroke="#f7f1e1" stroke-width="2.5" stroke-linecap="square"/>
-      <circle cx="30" cy="20" r="4.5" fill="none" stroke="#c5552d" stroke-width="2"/>
-      <circle cx="30" cy="20" r="1.4" fill="#c5552d"/>
-    </svg>
+    <img class="brand-mono" src="data:image/jpeg;base64,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" alt="ESTIC Don Bosco" />
     <div>
       <div class="brand-text">ESTIC Don Bosco &middot; Technologie</div>
-      <div class="brand-sub">Cycle 4 &mdash; 4<sup>e</sup> / 3<sup>e</sup> &middot; <span style="opacity:0.7">&copy; M.&nbsp;Agostini</span></div>
+      <div class="brand-sub">Cycle 4 &middot; <span style="opacity:0.7">&copy; M.&nbsp;Agostini</span></div>
     </div>
   </div>
   <div class="hud">
@@ -1751,7 +1952,7 @@ h3 {
           <div class="hero-meta">
             <div class="hero-meta-item">
               <span class="hero-meta-label">Niveau</span>
-              <span class="hero-meta-val">4<sup>e</sup> / 3<sup>e</sup></span>
+              <span class="hero-meta-val">Cycle 4</span>
             </div>
             <div class="hero-meta-item">
               <span class="hero-meta-label">Mati&egrave;re</span>
@@ -2364,7 +2565,7 @@ h3 {
       <h2>Pr&ecirc;t<sup>&middot;</sup>e&thinsp;?<br>On <em>joue</em>&thinsp;!</h2>
       <p class="lede">
         Place &agrave; la pratique. <strong>Neuf activit&eacute;s</strong> t&rsquo;attendent, organis&eacute;es de la
-        plus simple &agrave; la plus exigeante. Tu dois r&eacute;ussir chacune &agrave; <strong>au moins 80&thinsp;%</strong>
+        plus simple &agrave; la plus exigeante. Tu dois r&eacute;ussir chacune &agrave; <strong>au moins 60&thinsp;%</strong>
         pour d&eacute;bloquer la suivante. L&rsquo;<strong>examen final</strong>, lui, ne se d&eacute;bloque qu&rsquo;avec un
         <strong>code</strong> que ton professeur te donnera.
       </p>
@@ -2446,7 +2647,7 @@ h3 {
           <div class="act-icon">&#127942;</div>
           <div class="act-body">
             <div class="act-title">Examen final &middot; sur&nbsp;20</div>
-            <div class="act-desc">12 questions m&eacute;lang&eacute;es. Note officielle avec mention. Demande le <strong>code</strong> &agrave; ton professeur pour le d&eacute;verrouiller.</div>
+            <div class="act-desc">15 questions m&eacute;lang&eacute;es, dont 3 <strong>mini-exercices</strong> (lecture, compl&eacute;tion, cr&eacute;ation). Note officielle avec mention. Demande le <strong>code</strong> &agrave; ton professeur pour le d&eacute;verrouiller.</div>
             <div class="act-meta">D&eacute;verrouillage par code &#128274;</div>
           </div>
         </a>
@@ -2456,8 +2657,8 @@ h3 {
         <div class="callout-icon">&#128272;</div>
         <div class="callout-body">
           <strong>R&egrave;gle&thinsp;:</strong> les activit&eacute;s sont verrouill&eacute;es en cha&icirc;ne. Tu dois
-          r&eacute;ussir l&rsquo;activit&eacute;&nbsp;N <em>&agrave; au moins 80&thinsp;%</em> pour d&eacute;bloquer la N+1. Tu peux
-          recommencer autant que tu veux pour grimper. Une &eacute;toile <strong>&starf;</strong> appara&icirc;tra sur les activit&eacute;s pass&eacute;es &agrave; 80&thinsp;% ou plus.
+          r&eacute;ussir l&rsquo;activit&eacute;&nbsp;N <em>&agrave; au moins 60&thinsp;%</em> pour d&eacute;bloquer la N+1. Tu peux
+          recommencer autant que tu veux pour grimper. Une &eacute;toile <strong>&starf;</strong> appara&icirc;tra sur les activit&eacute;s pass&eacute;es &agrave; 60&thinsp;% ou plus.
         </div>
       </div>
     </section>
@@ -2517,7 +2718,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis le <strong>Quiz Rapide</strong> &agrave; au moins <strong>80&thinsp;%</strong> pour d&eacute;bloquer cette activit&eacute;.
+              R&eacute;ussis le <strong>Quiz Rapide</strong> &agrave; au moins <strong>60&thinsp;%</strong> (300 pts) pour d&eacute;bloquer cette activit&eacute;.
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Quiz Rapide</span>
@@ -2569,7 +2770,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis le <strong>M&eacute;mory</strong> avec au plus <strong>12 essais</strong> (~80&thinsp;% d&rsquo;efficacit&eacute;) pour d&eacute;bloquer cette activit&eacute;.
+              Termine le <strong>M&eacute;mory</strong> (peu importe le nombre d&rsquo;essais) pour d&eacute;bloquer cette activit&eacute;.
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: M&eacute;mory</span>
@@ -2620,7 +2821,7 @@ h3 {
           </div>
           <div class="endscreen-actions">
             <button class="btn alt" data-restart="scenario">Recommencer</button>
-            <a href="#examen" class="btn accent">Examen final &rarr;</a>
+            <a href="#vraifaux" class="btn accent">Activit&eacute; suivante &rarr;</a>
           </div>
         </div>
       </div>
@@ -2641,7 +2842,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis <strong>Choisis le lien</strong> &agrave; au moins <strong>7&thinsp;/&thinsp;8</strong> (87&thinsp;%) pour d&eacute;bloquer cette activit&eacute;.
+              R&eacute;ussis <strong>Choisis le lien</strong> &agrave; au moins <strong>5&thinsp;/&thinsp;8</strong> (62&thinsp;%) pour d&eacute;bloquer cette activit&eacute;.
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Choisis le lien</span>
@@ -2698,7 +2899,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis <strong>Vrai ou Faux</strong> &agrave; au moins <strong>15&thinsp;/&thinsp;18</strong> (83&thinsp;%) pour d&eacute;bloquer cette activit&eacute;.
+              R&eacute;ussis <strong>Vrai ou Faux</strong> &agrave; au moins <strong>11&thinsp;/&thinsp;18</strong> (61&thinsp;%) pour d&eacute;bloquer cette activit&eacute;.
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Vrai ou Faux</span>
@@ -2768,7 +2969,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis <strong>Le bon compartiment</strong> avec au plus <strong>2 erreurs</strong> sur 12 (83&thinsp;%) pour d&eacute;bloquer cette activit&eacute;.
+              R&eacute;ussis <strong>Le bon compartiment</strong> avec au plus <strong>5 erreurs</strong> sur 12 pour d&eacute;bloquer cette activit&eacute;.
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Le bon compartiment</span>
@@ -2800,7 +3001,7 @@ h3 {
           </div>
           <div class="endscreen-actions">
             <button class="btn alt" data-restart="mult">Recommencer</button>
-            <a href="#examen" class="btn accent">Examen final &rarr;</a>
+            <a href="#completer" class="btn accent">Activit&eacute; suivante &rarr;</a>
           </div>
         </div>
       </div>
@@ -2821,7 +3022,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis <strong>Multiplicit&eacute;s Express</strong> &agrave; au moins <strong>10&thinsp;/&thinsp;12</strong> (83&thinsp;%).
+              R&eacute;ussis <strong>Multiplicit&eacute;s Express</strong> &agrave; au moins <strong>7&thinsp;/&thinsp;12</strong> (58&thinsp;%).
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Multiplicit&eacute;s</span>
@@ -2877,7 +3078,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis <strong>Compl&egrave;te le BDD</strong> &agrave; au moins <strong>7&thinsp;/&thinsp;9</strong> (78&thinsp;%).
+              R&eacute;ussis <strong>Compl&egrave;te le BDD</strong> &agrave; au moins <strong>6&thinsp;/&thinsp;9</strong> (67&thinsp;%).
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Compl&egrave;te le BDD</span>
@@ -2934,7 +3135,7 @@ h3 {
             <div class="lock-icon">&#128274;</div>
             <div class="lock-title">Activit&eacute; verrouill&eacute;e</div>
             <div class="lock-msg">
-              R&eacute;ussis <strong>Cr&eacute;e le BDD</strong> &agrave; au moins <strong>8&thinsp;/&thinsp;10</strong> (80&thinsp;%).
+              R&eacute;ussis <strong>Cr&eacute;e le BDD</strong> &agrave; au moins <strong>6&thinsp;/&thinsp;10</strong> (60&thinsp;%).
             </div>
             <div class="lock-prereq">
               <span>Pr&eacute;requis&thinsp;: Cr&eacute;e le BDD</span>
@@ -2980,35 +3181,55 @@ h3 {
       <div class="slide-num">22 &mdash; &Eacute;preuve finale</div>
       <h2>&#127942;&nbsp; Examen <em>final</em></h2>
       <p class="lede">
-        12 questions sur l&rsquo;ensemble du cours. Tu obtiens une <strong>note sur 20</strong>
-        avec une mention. C&rsquo;est l&rsquo;&eacute;preuve finale&thinsp;!
+        15 questions au total&thinsp;: 12 QCM sur l&rsquo;ensemble du cours plus
+        <strong>3 mini-exercices</strong> (lecture de bloc, compl&eacute;tion de BDD, cr&eacute;ation de BDD).
+        Tu obtiens une <strong>note sur 20</strong> avec une mention. C&rsquo;est l&rsquo;&eacute;preuve finale&thinsp;!
       </p>
 
       <div class="activity" id="examActivity">
         <!-- Lock overlay : d\u00e9verrouillage par code -->
         <div class="lock-overlay" id="examLock">
           <div class="lock-content">
-            <div class="lock-icon">&#128274;</div>
-            <div class="lock-title">Examen verrouill&eacute;</div>
-            <div class="lock-msg">
-              Saisis le <strong>code de d&eacute;verrouillage</strong> que ton professeur
-              t&rsquo;a communiqu&eacute;.
+            <div id="examLockStep1">
+              <div class="lock-icon">&#128274;</div>
+              <div class="lock-title">Examen verrouill&eacute;</div>
+              <div class="lock-msg">
+                Saisis le <strong>code de d&eacute;verrouillage</strong> que ton professeur
+                t&rsquo;a communiqu&eacute;.
+              </div>
+              <div class="code-form">
+                <input type="text" id="codeInput" class="code-input" placeholder="CODE" autocomplete="off" spellcheck="false" maxlength="20">
+                <button class="btn accent" id="codeSubmit">D&eacute;verrouiller</button>
+                <div class="code-msg" id="codeMsg"></div>
+              </div>
+              <div class="code-help">
+                &#128172;&nbsp; Demande le code &agrave; <strong>M.&nbsp;Agostini</strong>.
+              </div>
             </div>
-            <div class="code-form">
-              <input type="text" id="codeInput" class="code-input" placeholder="CODE" autocomplete="off" spellcheck="false" maxlength="20">
-              <button class="btn accent" id="codeSubmit">D&eacute;verrouiller</button>
-              <div class="code-msg" id="codeMsg"></div>
-            </div>
-            <div class="code-help">
-              &#128172;&nbsp; Demande le code &agrave; <strong>M.&nbsp;Agostini</strong>.
+            <div id="examLockStep2" style="display:none">
+              <div class="lock-icon">&#128221;</div>
+              <div class="lock-title">Avant de commencer&hellip;</div>
+              <div class="lock-msg">
+                Identifie-toi pour que ton professeur re&ccedil;oive ton r&eacute;sultat.
+                Saisis ton <strong>nom et pr&eacute;nom</strong> ainsi que ta <strong>classe</strong>.
+              </div>
+              <div class="code-form">
+                <input type="text" id="studentName" class="code-input" placeholder="Nom Pr&eacute;nom" autocomplete="off" spellcheck="false" maxlength="60" style="text-transform:none; letter-spacing:0">
+                <input type="text" id="studentClasse" class="code-input" placeholder="Classe (ex&thinsp;: 4A)" autocomplete="off" spellcheck="false" maxlength="10">
+                <button class="btn accent" id="studentSubmit">Commencer l&rsquo;examen &rarr;</button>
+                <div class="code-msg" id="studentMsg"></div>
+              </div>
+              <div class="code-help">
+                &#9888;&#65039;&nbsp; Une fois lanc&eacute;, l&rsquo;examen ne r&eacute;v&egrave;le pas les bonnes r&eacute;ponses. Tu d&eacute;couvriras ta note &agrave; la fin.
+              </div>
             </div>
           </div>
         </div>
 
         <div class="activity-head">
-          <span class="activity-stat" id="examQNum">Q 1 / 12</span>
+          <span class="activity-stat" id="examQNum">Q 1 / 15</span>
           <div class="activity-progress"><div class="activity-progress-fill" id="examProgress"></div></div>
-          <span class="activity-stat" id="examScore">0 / 12</span>
+          <span class="activity-stat" id="examScore">0 / 15</span>
         </div>
 
         <div id="examPlay">
@@ -3045,15 +3266,47 @@ h3 {
           Tous droits r&eacute;serv&eacute;s. Reproduction et diffusion interdites sans autorisation.
         </p>
         <p style="margin-top:14px; font-size:12px; color:var(--muted)">
-          Cours de technologie &mdash; Cycle 4 (4<sup>e</sup>&nbsp;/&nbsp;3<sup>e</sup>) &middot;
+          Cours de technologie &mdash; Cycle 4 &middot;
           <a href="#" id="contactLink" data-cfasync="false" style="color:var(--primary); text-decoration:none; border-bottom:1px dotted var(--primary)">Contacter l&rsquo;enseignant</a>
         </p>
         <p style="margin-top:14px; font-size:11px; color:var(--muted-soft); font-family: 'JetBrains Mono', monospace; letter-spacing:0.05em">
           v1.0 &middot; Mai 2026 &middot; Hors-ligne &middot;
           <button id="resetBtn" style="background:none; border:none; color:var(--muted-soft); cursor:pointer; font:inherit; text-decoration:underline; padding:0">r&eacute;initialiser ma progression</button>
+          &middot;
+          <button id="dashOpenBtn" class="dash-link">espace enseignant</button>
         </p>
       </div>
     </footer>
+
+    <!-- ===== TABLEAU DE BORD ENSEIGNANT (modal) ===== -->
+    <div class="dash-modal" id="dashModal">
+      <div class="dash-card">
+        <div class="dash-head">
+          <h3>&#128218;&nbsp; Espace enseignant &mdash; R&eacute;sultats</h3>
+          <button class="dash-close" id="dashCloseBtn" aria-label="Fermer">&times;</button>
+        </div>
+        <div class="dash-body">
+          <div id="dashPwdStep" class="dash-pwd-step">
+            <p style="font-size:14px; color:var(--ink-soft); margin:0 0 8px">
+              Acc&egrave;s prot&eacute;g&eacute;. Saisis le mot de passe&thinsp;:
+            </p>
+            <input type="password" id="dashPwd" placeholder="Mot de passe" autocomplete="current-password">
+            <button class="btn accent" id="dashUnlockBtn">Acc&eacute;der</button>
+            <div class="dash-pwd-msg" id="dashPwdMsg"></div>
+          </div>
+          <div id="dashContent" style="display:none">
+            <div class="dash-actions">
+              <button class="btn alt" id="dashRefreshBtn">&#8634;&nbsp; Actualiser</button>
+              <button class="btn alt" id="dashCsvBtn">&#128190;&nbsp; Exporter CSV</button>
+              <span class="dash-count" id="dashCount"></span>
+            </div>
+            <div class="dash-list" id="dashList">
+              <div class="dash-loading">Chargement&hellip;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 </div>
@@ -3713,6 +3966,83 @@ const ANIMATIONS = {
 const EXAM_CODE = "BDD2026";
 
 /* ====================================================================
+   ╔═══════════════════════════════════════════════════════════════╗
+   ║  CONFIGURATION ENSEIGNANT — FIREBASE & TABLEAU DE BORD        ║
+   ║                                                               ║
+   ║  FIREBASE_URL : URL de ta base Realtime Database.             ║
+   ║    Format :                                                   ║
+   ║    "https://<PROJECT>-default-rtdb.<REGION>.firebasedatabase.app" ║
+   ║    Si laissé vide ("") : sauvegarde locale uniquement.        ║
+   ║                                                               ║
+   ║  FIREBASE_PATH : nœud dans la base où sont stockés les        ║
+   ║    résultats. Aligné sur ta convention "resultats_xxx".       ║
+   ║                                                               ║
+   ║  TEACHER_PASSWORD : mot de passe du tableau de bord (footer). ║
+   ║                                                               ║
+   ║  Règles Firebase à AJOUTER dans ton fichier rules existant :  ║
+   ║    "resultats_bdd": {                                         ║
+   ║      ".read":  "now < 1780300800000",                         ║
+   ║      ".write": "now < 1780300800000"                          ║
+   ║    }                                                          ║
+   ║  (Voir la conversation pour le bloc rules complet à coller.)  ║
+   ╚═══════════════════════════════════════════════════════════════╝
+   ==================================================================== */
+const FIREBASE_URL = "https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app";
+const FIREBASE_PATH = "resultats_bdd";
+const TEACHER_PASSWORD = "Agostini2025";
+
+const RESULTS_LOCAL_KEY = "bdd_exam_results_local";
+
+/* Envoie un r\u00e9sultat \u00e0 Firebase + sauvegarde locale (backup) */
+async function submitExamResult(payload) {
+  // Toujours sauvegarder localement aussi (backup hors-ligne)
+  try {
+    const stored = JSON.parse(localStorage.getItem(RESULTS_LOCAL_KEY) || "[]");
+    stored.push(payload);
+    localStorage.setItem(RESULTS_LOCAL_KEY, JSON.stringify(stored));
+  } catch(e) {}
+
+  if (!FIREBASE_URL) {
+    return { ok: true, mode: 'local' };
+  }
+  try {
+    const res = await fetch(FIREBASE_URL.replace(/\/$/, '') + '/' + FIREBASE_PATH + '.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    return { ok: true, mode: 'firebase', key: (data && data.name) || null };
+  } catch(e) {
+    return { ok: false, mode: 'firebase-failed', error: String(e) };
+  }
+}
+
+/* R\u00e9cup\u00e8re les r\u00e9sultats (Firebase + local) */
+async function fetchAllResults() {
+  let firebase = [];
+  if (FIREBASE_URL) {
+    try {
+      const res = await fetch(FIREBASE_URL.replace(/\/$/, '') + '/' + FIREBASE_PATH + '.json');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && typeof data === 'object') {
+          firebase = Object.entries(data).map(([k, v]) => Object.assign({ _src: 'firebase', _key: k }, v));
+        }
+      }
+    } catch(e) {}
+  }
+  let local = [];
+  try {
+    local = JSON.parse(localStorage.getItem(RESULTS_LOCAL_KEY) || "[]")
+              .map(r => Object.assign({ _src: 'local' }, r));
+  } catch(e) {}
+  // Si on a Firebase, c'est la source de v\u00e9rit\u00e9 ; sinon on retombe sur local
+  return firebase.length ? firebase : local;
+}
+
+/* ====================================================================
    AUDIO : sons Web Audio
    ==================================================================== */
 const AUDIO = (() => {
@@ -3776,6 +4106,8 @@ const PROGRESS = (() => {
       complete:false, create:false, read:false
     },
     examCodeUnlocked:false,
+    student: "",
+    classe: "",
     scores:{}, xp:0
   };
   // Cha\u00eene des activit\u00e9s : chacune n\u00e9cessite la pr\u00e9c\u00e9dente pass\u00e9e \u00e0 80%
@@ -3828,39 +4160,38 @@ const PROGRESS = (() => {
     if (sc === undefined) return { label: 'Pas encore tent\u00e9', ratio: 0 };
     if (state.passed[prev]) return { label: 'Pass\u00e9 \u2713', ratio: 1 };
     if (prev === 'quiz') {
-      // pass si score >= 400
-      const r = Math.min(1, sc / 400);
-      return { label: sc + '/400 pts', ratio: r };
+      // pass si score >= 300
+      const r = Math.min(1, sc / 300);
+      return { label: sc + '/300 pts', ratio: r };
     }
     if (prev === 'memory') {
-      // pass si essais <= 12 (le moins, le mieux)
-      const r = Math.max(0, Math.min(1, (20 - sc) / 8));
-      return { label: sc + ' essais', ratio: r };
+      // suffit de l'avoir termin\u00e9 (peu importe le nombre d'essais)
+      return { label: 'Termin\u00e9 \u2713', ratio: 1 };
     }
     if (prev === 'scenario') {
-      const r = Math.min(1, sc / 7);
-      return { label: sc + '/7 \u00e0 atteindre', ratio: r };
+      const r = Math.min(1, sc / 5);
+      return { label: sc + '/5 \u00e0 atteindre', ratio: r };
     }
     if (prev === 'vf') {
-      const r = Math.min(1, sc / 15);
-      return { label: sc + '/15 \u00e0 atteindre', ratio: r };
+      const r = Math.min(1, sc / 11);
+      return { label: sc + '/11 \u00e0 atteindre', ratio: r };
     }
     if (prev === 'compart') {
-      // erreurs (le moins le mieux). Pass si <= 2
-      const r = Math.max(0, Math.min(1, (12 - sc) / 10));
+      // erreurs (le moins le mieux). Pass si <= 5
+      const r = Math.max(0, Math.min(1, (12 - sc) / 7));
       return { label: sc + ' erreurs', ratio: r };
     }
     if (prev === 'mult') {
-      const r = Math.min(1, sc / 10);
-      return { label: sc + '/10 \u00e0 atteindre', ratio: r };
-    }
-    if (prev === 'complete') {
       const r = Math.min(1, sc / 7);
       return { label: sc + '/7 \u00e0 atteindre', ratio: r };
     }
+    if (prev === 'complete') {
+      const r = Math.min(1, sc / 6);
+      return { label: sc + '/6 \u00e0 atteindre', ratio: r };
+    }
     if (prev === 'create') {
-      const r = Math.min(1, sc / 8);
-      return { label: sc + '/8 \u00e0 atteindre', ratio: r };
+      const r = Math.min(1, sc / 6);
+      return { label: sc + '/6 \u00e0 atteindre', ratio: r };
     }
     return { label: sc, ratio: 0 };
   }
@@ -3906,9 +4237,23 @@ const PROGRESS = (() => {
       const s = prereqStat(prev);
       el.innerHTML = '<strong>' + s.label + '</strong>';
     });
-    // Verrou de l'examen : par code
+    // Verrou de l'examen : par code ET identification \u00e9l\u00e8ve
     const examLock = document.getElementById('examLock');
-    if (examLock) examLock.style.display = state.examCodeUnlocked ? 'none' : 'grid';
+    if (examLock) {
+      const codeOk    = state.examCodeUnlocked === true;
+      const studentOk = !!(state.student && state.classe);
+      if (codeOk && studentOk) {
+        examLock.style.display = 'none';
+      } else {
+        examLock.style.display = 'grid';
+        const s1 = document.getElementById('examLockStep1');
+        const s2 = document.getElementById('examLockStep2');
+        if (s1 && s2) {
+          if (codeOk) { s1.style.display = 'none'; s2.style.display = 'block'; }
+          else        { s1.style.display = 'block'; s2.style.display = 'none'; }
+        }
+      }
+    }
   }
   function pulse(key){
     const el = document.querySelector('.badge[data-badge="' + key + '"]');
@@ -3923,6 +4268,11 @@ const PROGRESS = (() => {
     isUnlocked,
     examUnlocked(){ return state.examCodeUnlocked === true; },
     setExamUnlocked(v){ state.examCodeUnlocked = !!v; save(); render(); },
+    setStudent(name, classe){
+      state.student = (name || '').trim();
+      state.classe  = (classe || '').trim();
+      save();
+    },
     setPassed(b, v){
       const wasPassed = state.passed[b];
       state.passed[b] = !!v;
@@ -4150,7 +4500,53 @@ const EXAM_DATA = [
     correct: 0 },
   { q: "Pour pr\u00e9ciser \u00ab\u00a0combien\u00a0\u00bb \u00e0 chaque bout d'un lien, on utilise\u00a0:",
     choices: ["Un nom de r\u00f4le","Un st\u00e9r\u00e9otype","Une multiplicit\u00e9","Une couleur"],
-    correct: 2 }
+    correct: 2 },
+  // ===== 3 EXERCICES SP\u00c9CIAUX INT\u00c9GR\u00c9S =====
+  { type: 'special', subtype: 'read',
+    contextTitle: '\ud83d\udcd6  Lecture de bloc',
+    bdd: {
+      width: 600, height: 270,
+      blocks: [
+        { id: 'pli', name: 'ParapluiePliant', x: 380, y: 20, w: 170 },
+        { id: 'par', name: 'Parapluie', x: 220, y: 20, w: 140 },
+        { id: 'man', name: 'Manche',    x: 30,  y: 190, w: 120 },
+        { id: 'bal', name: 'Baleine',   x: 170, y: 190, w: 120 },
+        { id: 'tis', name: 'Tissu',     x: 310, y: 190, w: 120 },
+        { id: 'uti', name: 'Utilisateur', x: 450, y: 190, w: 130 }
+      ],
+      links: [
+        { from: 'pli', to: 'par', type: 'generalisation' },
+        { from: 'par', to: 'man', type: 'composition', multB: '1' },
+        { from: 'par', to: 'bal', type: 'composition', multB: '6..10' },
+        { from: 'par', to: 'tis', type: 'composition', multB: '1' },
+        { from: 'par', to: 'uti', type: 'association',  multB: '0..1', label: 'tient' }
+      ]
+    },
+    q: "Selon ce BDD, combien de baleines a un parapluie\u00a0?",
+    choices: ["6","8","6..10","1..*"], correct: 2 },
+  { type: 'special', subtype: 'complete',
+    contextTitle: '\u270f\ufe0f  Compl\u00e9ter le BDD',
+    bdd: {
+      width: 540, height: 250,
+      blocks: [
+        { id: 'sty', name: 'Stylo',    x: 200, y: 20, w: 140 },
+        { id: 'cap', name: 'Capuchon', x: 30,  y: 180, w: 130 },
+        { id: 'min', name: 'Mine',     x: 195, y: 180, w: 130 },
+        { id: 'cor', name: 'Corps',    x: 360, y: 180, w: 130 }
+      ],
+      links: [
+        { from: 'sty', to: 'cap', type: 'composition', multB: '1' },
+        { from: 'sty', to: 'min', type: 'composition', multB: '?' },
+        { from: 'sty', to: 'cor', type: 'composition', multB: '1' }
+      ]
+    },
+    q: "Quelle est la multiplicit\u00e9 manquante (?) entre Stylo et Mine\u00a0?",
+    choices: ["1","2","1..*","0..1"], correct: 0 },
+  { type: 'special', subtype: 'create',
+    contextTitle: '\ud83d\udee0\ufe0f  Cr\u00e9er le BDD',
+    desc: "On souhaite mod\u00e9liser un <strong>sac \u00e0 dos</strong>. Il poss\u00e8de toujours <strong>2 bretelles int\u00e9gr\u00e9es</strong>, une <strong>poche principale</strong> int\u00e9gr\u00e9e, et l'<strong>utilisateur</strong> le porte sur son dos (mais il peut le poser).",
+    q: "Quel lien repr\u00e9sente le mieux la relation entre <em>SacADos</em> et <em>Utilisateur</em>\u00a0?",
+    choices: ["Composition","Agr\u00e9gation","G\u00e9n\u00e9ralisation","Association"], correct: 3 }
 ];
 
 const VF_DATA = [
@@ -4341,7 +4737,7 @@ const Quiz = (() => {
     el('quizEnd').classList.add('show');
     PROGRESS.setScore('quiz', total);
     PROGRESS.unlock('quiz', total);
-    if (total >= 400) {
+    if (total >= 300) {
       PROGRESS.setPassed('quiz', true);
       AUDIO.fanfare();
     }
@@ -4447,7 +4843,7 @@ const Memory = (() => {
       el('memEndMsg').textContent = msg;
       el('memEnd').classList.add('show');
       PROGRESS.unlock('memory', tries);
-      if (tries <= 12) PROGRESS.setPassed('memory', true);
+      PROGRESS.setPassed('memory', true);
       AUDIO.fanfare();
     }, 600);
   }
@@ -4524,7 +4920,7 @@ const Scenario = (() => {
     el('scnEndMsg').textContent = msg;
     el('scnEnd').classList.add('show');
     PROGRESS.unlock('scenario', score);
-    if (score >= 7) PROGRESS.setPassed('scenario', true);
+    if (score >= 5) PROGRESS.setPassed('scenario', true);
     AUDIO.fanfare();
   }
 
@@ -4611,7 +5007,7 @@ const VF = (() => {
     el('vfEndScore').textContent = score;
     el('vfEnd').classList.add('show');
     PROGRESS.unlock('vf', score);
-    if (score >= 15) PROGRESS.setPassed('vf', true);
+    if (score >= 11) PROGRESS.setPassed('vf', true);
     AUDIO.fanfare();
   }
 
@@ -4640,6 +5036,14 @@ const Compart = (() => {
     placed = 0; errors = 0; selected = null;
     el('compartEnd').classList.remove('show');
     el('compartPlay').style.display = 'block';
+    // Attache les listeners de zone UNE SEULE FOIS (sinon chaque render
+    // empilait un listener suppl\u00e9mentaire \u2192 errors++ multipli\u00e9 \u00e0 chaque clic)
+    document.querySelectorAll('.compart-zone').forEach(z => {
+      if (z.dataset.bound === '1') return;
+      const zone = z.getAttribute('data-zone');
+      z.addEventListener('click', () => zoneClick(zone, z));
+      z.dataset.bound = '1';
+    });
     render();
     update();
   }
@@ -4656,10 +5060,9 @@ const Compart = (() => {
       div.addEventListener('click', () => selectItem(it.id, div));
       pool.appendChild(div);
     });
-    // Vide les zones puis re-remplit avec les items plac\u00e9s
+    // Vide les zones puis re-remplit avec les items plac\u00e9s (sans toucher aux listeners)
     document.querySelectorAll('.compart-zone').forEach(z => {
       const zone = z.getAttribute('data-zone');
-      // garder le titre, supprimer les items
       Array.from(z.querySelectorAll('.compart-item')).forEach(c => c.remove());
       items.filter(it => it.placed && it.zone === zone).forEach(it => {
         const div = document.createElement('div');
@@ -4667,7 +5070,6 @@ const Compart = (() => {
         div.textContent = it.text;
         z.appendChild(div);
       });
-      z.addEventListener('click', () => zoneClick(zone, z), { once: false });
     });
     el('compartFeedback').className = 'feedback';
     el('compartFeedback').innerHTML = '';
@@ -4738,7 +5140,7 @@ const Compart = (() => {
     el('compartEndMsg').textContent = msg;
     el('compartEnd').classList.add('show');
     PROGRESS.unlock('compart', errors);
-    if (errors <= 2) PROGRESS.setPassed('compart', true);
+    if (errors <= 5) PROGRESS.setPassed('compart', true);
     AUDIO.fanfare();
   }
 
@@ -4817,7 +5219,7 @@ const Mult = (() => {
     el('multEndMsg').textContent = msg;
     el('multEnd').classList.add('show');
     PROGRESS.unlock('mult', score);
-    if (score >= 10) PROGRESS.setPassed('mult', true);
+    if (score >= 7) PROGRESS.setPassed('mult', true);
     AUDIO.fanfare();
   }
 
@@ -4834,8 +5236,24 @@ function bddSvg(spec){
   lines.push('<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" style="max-width:' + w + 'px; display:block; margin:auto" xmlns="http://www.w3.org/2000/svg">');
   const find = id => spec.blocks.find(b => b.id === id);
 
+  function blockHeight(b){
+    if (b.h !== undefined) return b.h; // override explicite si fourni (y compris h:0)
+    if (!b.values && !b.parts) return 56;
+    let y = 48 + 14; // ligne s\u00e9paratrice + espacement
+    if (b.values) {
+      y += 13;                       // titre du compartiment
+      y += b.values.length * 12;     // une ligne par caract\u00e9ristique
+    }
+    if (b.parts) {
+      if (b.values) y += 13;         // s\u00e9paration values\u2194parts
+      y += 13;                       // titre du compartiment
+      y += b.parts.length * 12;
+    }
+    return Math.max(56, y + 8);      // padding bas
+  }
+
   function blockBox(b){
-    return { x: b.x, y: b.y, w: b.w || 140, h: b.h || 56 };
+    return { x: b.x, y: b.y, w: b.w || 140, h: blockHeight(b) };
   }
 
   function connect(a, b){
@@ -5326,7 +5744,7 @@ const Complete = (() => {
     el('completeEndMsg').textContent = msg;
     el('completeEnd').classList.add('show');
     PROGRESS.unlock('complete', score);
-    if (score >= 7) PROGRESS.setPassed('complete', true);
+    if (score >= 6) PROGRESS.setPassed('complete', true);
     AUDIO.fanfare();
   }
 
@@ -5428,7 +5846,7 @@ const Create = (() => {
     el('createFinalBdd').innerHTML = svgsHtml;
     el('createEnd').classList.add('show');
     PROGRESS.unlock('create', score);
-    if (score >= 8) PROGRESS.setPassed('create', true);
+    if (score >= 6) PROGRESS.setPassed('create', true);
     AUDIO.fanfare();
   }
 
@@ -5525,7 +5943,7 @@ const Read = (() => {
     el('readEndMsg').textContent = msg;
     el('readEnd').classList.add('show');
     PROGRESS.unlock('read', score);
-    if (score >= 7) PROGRESS.setPassed('read', true);
+    if (score >= 5) PROGRESS.setPassed('read', true);
     AUDIO.fanfare();
   }
 
@@ -5537,6 +5955,8 @@ const Read = (() => {
    ==================================================================== */
 const Exam = (() => {
   let idx = 0, score = 0, answered = false, order = [];
+  let examAnswers = [];   // collecte de toutes les r\u00e9ponses pour la base
+  let startTime = 0;
 
   function el(id){ return document.getElementById(id); }
   function shuffle(a){ for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
@@ -5544,9 +5964,12 @@ const Exam = (() => {
   function start(){
     if (!PROGRESS.examUnlocked()) return;
     idx = 0; score = 0;
+    examAnswers = [];
+    startTime = Date.now();
     order = shuffle(EXAM_DATA.map((_, i) => i));
     el('examEnd').classList.remove('show');
     el('examPlay').style.display = 'block';
+    el('examScore').style.visibility = 'hidden'; // anti-fuite pendant l'examen
     render();
   }
 
@@ -5556,8 +5979,14 @@ const Exam = (() => {
     const q = EXAM_DATA[order[idx]];
     el('examQNum').textContent = 'Q ' + (idx + 1) + ' / ' + order.length;
     el('examProgress').style.width = (idx / order.length * 100) + '%';
-    el('examScore').textContent = score + ' / ' + order.length;
-    el('examQ').innerHTML = '<span class="qnum">QUESTION&nbsp;' + (idx + 1) + '</span>' + q.q;
+    let html = '';
+    if (q.type === 'special') {
+      html += '<div class="exam-special-tag">' + q.contextTitle + '</div>';
+      if (q.bdd) html += '<div class="bdd-display" style="margin: 4px 0 14px">' + bddSvg(q.bdd) + '</div>';
+      if (q.desc) html += '<div class="bdd-context" style="margin-bottom:12px">' + q.desc + '</div>';
+    }
+    html += '<span class="qnum">QUESTION&nbsp;' + (idx + 1) + '</span>' + q.q;
+    el('examQ').innerHTML = html;
     const ch = el('examChoices');
     ch.innerHTML = '';
     q.choices.forEach((c, i) => {
@@ -5577,22 +6006,31 @@ const Exam = (() => {
     const q = EXAM_DATA[order[idx]];
     const btns = el('examChoices').querySelectorAll('.choice');
     btns.forEach(b => b.disabled = true);
-    if (i === q.correct) {
-      btns[i].classList.add('correct');
-      score++;
-      AUDIO.success();
-    } else {
-      btns[i].classList.add('wrong');
-      btns[q.correct].classList.add('correct');
-      AUDIO.error();
-    }
-    el('examScore').textContent = score + ' / ' + order.length;
-    setTimeout(() => { idx++; render(); }, 1500);
+    // Pas de feedback correct/incorrect : juste un \u00e9tat "choix s\u00e9lectionn\u00e9" neutre
+    btns[i].classList.add('selected-exam');
+    AUDIO.tick();
+    // Score interne (non affich\u00e9 pendant l'exam)
+    if (i === q.correct) score++;
+    // Collecte de la r\u00e9ponse pour Firebase / CSV
+    examAnswers.push({
+      idx: order[idx],
+      question: q.q,
+      picked: i,
+      pickedText: q.choices[i],
+      correctIdx: q.correct,
+      correctText: q.choices[q.correct],
+      ok: i === q.correct,
+      type: q.type || 'standard'
+    });
+    setTimeout(() => { idx++; render(); }, 600);
   }
 
-  function finish(){
+  async function finish(){
     el('examPlay').style.display = 'none';
     el('examProgress').style.width = '100%';
+    // R\u00e9-affiche le compteur final de bonnes r\u00e9ponses
+    el('examScore').style.visibility = 'visible';
+    el('examScore').textContent = score + ' / ' + order.length;
     // note sur 20
     const note = Math.round((score / EXAM_DATA.length) * 20 * 10) / 10;
     el('examEndScore').textContent = note;
@@ -5614,6 +6052,41 @@ const Exam = (() => {
       AUDIO.fanfare();
       confetti(160);
     }
+    // ENVOI DES R\u00c9SULTATS \u00e0 Firebase + sauvegarde locale
+    const st = PROGRESS.state();
+    const payload = {
+      student: (st.student || '').trim() || 'Anonyme',
+      classe:  (st.classe  || '').trim() || '?',
+      score: score,
+      total: EXAM_DATA.length,
+      note: note,
+      mention: mention,
+      duration_sec: Math.round((Date.now() - startTime) / 1000),
+      timestamp: new Date().toISOString(),
+      answers: examAnswers
+    };
+    showSubmitStatus('loading');
+    const res = await submitExamResult(payload);
+    if (res.ok && res.mode === 'firebase')         showSubmitStatus('ok');
+    else if (res.ok && res.mode === 'local')       showSubmitStatus('local');
+    else                                            showSubmitStatus('warn', res.error);
+  }
+
+  function showSubmitStatus(kind, err){
+    let html;
+    if (kind === 'loading')      html = '<div class="submit-status local">\u23f3\u00a0Envoi du r\u00e9sultat\u2026</div>';
+    else if (kind === 'ok')      html = '<div class="submit-status ok">\u2713\u00a0R\u00e9sultat envoy\u00e9 \u00e0 ton professeur</div>';
+    else if (kind === 'local')   html = '<div class="submit-status local">\u2713\u00a0R\u00e9sultat enregistr\u00e9 localement (mode hors-ligne)</div>';
+    else                         html = '<div class="submit-status warn">\u26a0\ufe0f\u00a0Envoi \u00e9chou\u00e9 \u2014 r\u00e9sultat sauvegard\u00e9 localement</div>';
+    // Ajoute apr\u00e8s le message principal
+    const container = el('examEndMsg');
+    // Retire l'ancien si pr\u00e9sent
+    const old = document.getElementById('examSubmitStatus');
+    if (old) old.remove();
+    const wrap = document.createElement('div');
+    wrap.id = 'examSubmitStatus';
+    wrap.innerHTML = html;
+    container.parentNode.insertBefore(wrap, container.nextSibling);
   }
 
   return { start };
@@ -5651,7 +6124,7 @@ const Exam = (() => {
     }, { threshold: 0.25 }).observe(sec);
   });
 
-  // L'examen : d\u00e9marre uniquement si le CODE a \u00e9t\u00e9 saisi
+  // L'examen : d\u00e9marre uniquement si CODE saisi ET \u00e9l\u00e8ve identifi\u00e9
   const examSection = document.getElementById('examen');
   let examLoaded = false;
   if (examSection) {
@@ -5659,7 +6132,8 @@ const Exam = (() => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           PROGRESS.render();
-          if (PROGRESS.examUnlocked()) {
+          const st = PROGRESS.state();
+          if (PROGRESS.examUnlocked() && st.student && st.classe) {
             const end = document.getElementById('examEnd');
             if (!examLoaded || (end && !end.classList.contains('show'))) {
               examLoaded = true;
@@ -5671,23 +6145,33 @@ const Exam = (() => {
     }, { threshold: 0.25 }).observe(examSection);
   }
 
-  // FORMULAIRE de code de d\u00e9verrouillage
-  const codeInput = document.getElementById('codeInput');
+  // FORMULAIRE de code de d\u00e9verrouillage \u2192 identification \u00e9l\u00e8ve \u2192 examen
+  const codeInput  = document.getElementById('codeInput');
   const codeSubmit = document.getElementById('codeSubmit');
-  const codeMsg = document.getElementById('codeMsg');
+  const codeMsg    = document.getElementById('codeMsg');
+  const stStep1    = document.getElementById('examLockStep1');
+  const stStep2    = document.getElementById('examLockStep2');
+  const stName     = document.getElementById('studentName');
+  const stClasse   = document.getElementById('studentClasse');
+  const stSubmit   = document.getElementById('studentSubmit');
+  const stMsg      = document.getElementById('studentMsg');
+
   function trySubmitCode(){
     const v = (codeInput.value || '').trim().toUpperCase();
-    const expected = EXAM_CODE.toUpperCase();
-    if (v === expected) {
+    if (v === EXAM_CODE.toUpperCase()) {
       codeMsg.className = 'code-msg';
-      codeMsg.textContent = 'Code valide. D\u00e9verrouillage\u2026';
+      codeMsg.textContent = 'Code valide.';
       codeInput.classList.remove('error');
       AUDIO.fanfare();
       PROGRESS.setExamUnlocked(true);
-      setTimeout(() => {
-        Exam.start();
-        confetti(80);
-      }, 700);
+      // Passe \u00e0 l'\u00e9tape 2 (identification \u00e9l\u00e8ve)
+      stStep1.style.display = 'none';
+      stStep2.style.display = 'block';
+      // Pr\u00e9-remplit si on a d\u00e9j\u00e0 un nom en m\u00e9moire
+      const st = PROGRESS.state();
+      if (st.student) stName.value = st.student;
+      if (st.classe)  stClasse.value = st.classe;
+      setTimeout(() => stName.focus(), 200);
     } else {
       codeMsg.className = 'code-msg bad';
       codeMsg.textContent = 'Code incorrect. Demande-le \u00e0 ton professeur.';
@@ -5696,12 +6180,45 @@ const Exam = (() => {
       setTimeout(() => codeInput.classList.remove('error'), 500);
     }
   }
+  function trySubmitStudent(){
+    const n = (stName.value || '').trim();
+    const c = (stClasse.value || '').trim();
+    if (n.length < 2) {
+      stMsg.className = 'code-msg bad';
+      stMsg.textContent = 'Saisis ton nom et pr\u00e9nom.';
+      stName.focus();
+      AUDIO.error();
+      return;
+    }
+    if (c.length < 1) {
+      stMsg.className = 'code-msg bad';
+      stMsg.textContent = 'Saisis ta classe.';
+      stClasse.focus();
+      AUDIO.error();
+      return;
+    }
+    PROGRESS.setStudent(n, c);
+    stMsg.className = 'code-msg';
+    stMsg.textContent = '';
+    AUDIO.fanfare();
+    // Lance l'examen et masque l'overlay
+    setTimeout(() => {
+      const examLock = document.getElementById('examLock');
+      if (examLock) examLock.style.display = 'none';
+      Exam.start();
+      confetti(60);
+    }, 300);
+  }
+
   if (codeSubmit) codeSubmit.addEventListener('click', trySubmitCode);
   if (codeInput) {
     codeInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { e.preventDefault(); trySubmitCode(); }
     });
   }
+  if (stSubmit) stSubmit.addEventListener('click', trySubmitStudent);
+  if (stName)   stName.addEventListener('keydown',   (e) => { if (e.key === 'Enter') { e.preventDefault(); stClasse.focus(); } });
+  if (stClasse) stClasse.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); trySubmitStudent(); } });
 
   // Boutons "Recommencer"
   document.querySelectorAll('[data-restart]').forEach(b => {
@@ -5756,6 +6273,141 @@ const Exam = (() => {
       VF.start(); Compart.start(); Mult.start();
       Complete.start(); Create.start(); Read.start();
     }
+  });
+
+  /* ====== TABLEAU DE BORD ENSEIGNANT ====== */
+  const dashModal     = document.getElementById('dashModal');
+  const dashOpenBtn   = document.getElementById('dashOpenBtn');
+  const dashCloseBtn  = document.getElementById('dashCloseBtn');
+  const dashUnlockBtn = document.getElementById('dashUnlockBtn');
+  const dashPwd       = document.getElementById('dashPwd');
+  const dashPwdMsg    = document.getElementById('dashPwdMsg');
+  const dashPwdStep   = document.getElementById('dashPwdStep');
+  const dashContent   = document.getElementById('dashContent');
+  const dashList      = document.getElementById('dashList');
+  const dashCount     = document.getElementById('dashCount');
+  const dashRefresh   = document.getElementById('dashRefreshBtn');
+  const dashCsvBtn    = document.getElementById('dashCsvBtn');
+
+  let dashResults = [];
+
+  function dashOpen(){
+    dashModal.classList.add('show');
+    dashPwdStep.style.display = 'flex';
+    dashContent.style.display = 'none';
+    dashPwd.value = '';
+    dashPwdMsg.textContent = '';
+    setTimeout(() => dashPwd.focus(), 100);
+  }
+  function dashClose(){
+    dashModal.classList.remove('show');
+  }
+  function dashUnlock(){
+    if (dashPwd.value === TEACHER_PASSWORD) {
+      dashPwdStep.style.display = 'none';
+      dashContent.style.display = 'block';
+      dashPwdMsg.textContent = '';
+      dashLoad();
+    } else {
+      dashPwdMsg.textContent = 'Mot de passe incorrect';
+      dashPwd.classList.add('error');
+      setTimeout(() => dashPwd.classList.remove('error'), 500);
+      dashPwd.focus(); dashPwd.select();
+    }
+  }
+  async function dashLoad(){
+    dashList.innerHTML = '<div class="dash-loading">Chargement\u2026</div>';
+    dashResults = await fetchAllResults();
+    dashRender();
+  }
+  function dashRender(){
+    if (!dashResults || dashResults.length === 0) {
+      dashList.innerHTML = '<div class="dash-empty">Aucun r\u00e9sultat pour l\'instant.<br><small>' +
+        (FIREBASE_URL ? 'Source\u00a0: Firebase' : 'Source\u00a0: stockage local (Firebase non configur\u00e9)') +
+        '</small></div>';
+      dashCount.textContent = '0 r\u00e9sultat';
+      return;
+    }
+    dashResults.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+    dashCount.textContent = dashResults.length + ' r\u00e9sultat' + (dashResults.length > 1 ? 's' : '') +
+      (FIREBASE_URL ? ' \u00b7 Firebase' : ' \u00b7 local');
+    let html = '<div class="dash-row dash-head-row">' +
+      '<span>Nom</span><span>Classe</span><span>Note</span><span>Mention</span><span>Date</span>' +
+      '</div>';
+    dashResults.forEach(r => {
+      html += '<div class="dash-row">' +
+        '<span class="dash-name">' + escapeHtml(r.student || '?') + '</span>' +
+        '<span class="dash-classe">' + escapeHtml(r.classe || '?') + '</span>' +
+        '<span class="dash-note">' + (r.note != null ? r.note : '?') + '/20</span>' +
+        '<span class="dash-mention">' + escapeHtml(r.mention || '') + '</span>' +
+        '<span class="dash-time">' + formatDateFr(r.timestamp) + '</span>' +
+        '</div>';
+    });
+    dashList.innerHTML = html;
+  }
+  function escapeHtml(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function formatDateFr(iso){
+    if (!iso) return '?';
+    try {
+      const d = new Date(iso);
+      const dd = String(d.getDate()).padStart(2, '0');
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const yy = String(d.getFullYear());
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mn = String(d.getMinutes()).padStart(2, '0');
+      return dd + '/' + mm + '/' + yy + ' ' + hh + ':' + mn;
+    } catch(e){ return iso; }
+  }
+  function dashExportCsv(){
+    if (!dashResults || dashResults.length === 0) {
+      alert('Aucun r\u00e9sultat \u00e0 exporter.');
+      return;
+    }
+    const rows = [['Nom', 'Classe', 'Score', 'Total', 'Note/20', 'Mention', 'Dur\u00e9e (s)', 'Date ISO']];
+    dashResults.forEach(r => {
+      rows.push([
+        r.student || '',
+        r.classe  || '',
+        r.score != null ? r.score : '',
+        r.total != null ? r.total : '',
+        r.note  != null ? r.note  : '',
+        r.mention || '',
+        r.duration_sec != null ? r.duration_sec : '',
+        r.timestamp || ''
+      ]);
+    });
+    const csv = rows.map(row =>
+      row.map(cell => {
+        const s = String(cell);
+        if (/[",;\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+        return s;
+      }).join(';')
+    ).join('\r\n');
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' }); // BOM pour Excel
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'resultats-examen-bdd-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  if (dashOpenBtn)   dashOpenBtn.addEventListener('click', dashOpen);
+  if (dashCloseBtn)  dashCloseBtn.addEventListener('click', dashClose);
+  if (dashUnlockBtn) dashUnlockBtn.addEventListener('click', dashUnlock);
+  if (dashPwd)       dashPwd.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); dashUnlock(); } });
+  if (dashRefresh)   dashRefresh.addEventListener('click', dashLoad);
+  if (dashCsvBtn)    dashCsvBtn.addEventListener('click', dashExportCsv);
+  if (dashModal)     dashModal.addEventListener('click', (e) => { if (e.target === dashModal) dashClose(); });
+  // Echap pour fermer
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dashModal && dashModal.classList.contains('show')) dashClose();
   });
 
   // Premier rendu progression
